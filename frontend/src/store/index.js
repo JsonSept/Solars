@@ -1,17 +1,21 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 const baseUrl = "http://localhost:9000";
+
 export default createStore({
   state: {
     user: null,
     signupStatus: '',
     signupError: null,
+    isLoggedIn: false,
+    loginError: null,
   },
-  
   getters: {
-     signupStatus: (state) => state.signupStatus,
-     signupError: (state) => state.signupError,
-     user: (state) => state.user,
+    signupStatus: (state) => state.signupStatus,
+    signupError: (state) => state.signupError,
+    user: (state) => state.user,
+    isLoggedIn: state => state.isLoggedIn,
+    loginError: state => state.loginError,
   },
   mutations: {
      SET_SIGNUP_STATUS(state, status) {
@@ -22,6 +26,12 @@ export default createStore({
     },
     SET_USER(state, user) {
       state.user = user;
+    },
+    SET_LOGIN(state, status) {
+            state.isLoggedIn = status;
+        },
+    SET_LOGIN_ERROR(state, error) {
+        state.loginError = error;
     },
   },
   actions: {
@@ -44,6 +54,24 @@ export default createStore({
       commit('SET_SIGNUP_ERROR', errorMessage);
     }
     },
+
+    async login({ commit }, credentials) {
+       commit('SET_LOGIN', 'loading')
+            try {
+                const response = await axios.post(baseUrl + '/login', credentials); // Replace with your actual API endpoint
+                if (response.data.success) {
+                    commit('SET_LOGIN', true);
+                  commit('SET_LOGIN_ERROR', null);
+                  localStorage.setItem('token', response.data.token);
+                } else {
+                    commit('SET_LOGIN', false);
+                    commit('SET_LOGIN_ERROR', 'Invalid email or password');
+                }
+            } catch (error) {
+                commit('SET_LOGIN', false);
+                commit('SET_LOGIN_ERROR', 'An error occurred during login');
+            }
+        },
   },
   modules: {
   }
