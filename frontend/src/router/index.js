@@ -4,6 +4,16 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   {
     path: '/',
+    name: 'signup',
+    component: () => import('../components/Signup.vue')
+  },
+   {
+    path: '/login',
+    name: 'login',
+    component: () => import('../components/Login.vue')
+  },
+  {
+    path: '/home',
     name: 'home',
     component: HomeView
   },
@@ -26,17 +36,9 @@ const routes = [
     path: '/contact',
     name: 'contact',
     component: () => import('../views/Contact.vue')
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('../components/Login.vue')
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: () => import('../components/Signup.vue')
   }
+ 
+  
 ]
 
 const router = createRouter({
