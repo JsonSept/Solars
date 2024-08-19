@@ -13,7 +13,7 @@
       <div class="offcanvas-body bg-dark">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <router-link  class="nav-link" @click="closeOffcanvas" active-class="active" to="/">HOME</router-link>
+            <router-link  class="nav-link" @click="closeOffcanvas" active-class="active" to="/home">HOME</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/energy">ENERGY DATA</router-link>
@@ -28,7 +28,7 @@
             <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/login">LOGIN</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/signup">SIGN UP</router-link>
+            <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/">SIGN UP</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/contact">Contact</router-link>
@@ -44,22 +44,42 @@
 <script setup>
 import { onMounted } from 'vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import bootstrap from 'bootstrap';
+
 import { Offcanvas } from 'bootstrap';
+
+// const closeOffcanvas = () => {
+//   const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
+//   const offcanvasInstance = Offcanvas.getInstance(offcanvasElement);
+//   // offcanvasInstance.hide();
+
+// };
 
 const closeOffcanvas = () => {
   const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
-  const offcanvasInstance = Offcanvas.getInstance(offcanvasElement);
+  const offcanvasInstance = Offcanvas.getInstance(offcanvasElement)
   offcanvasInstance.hide();
-};
+}
+
+// const removeBackdrop = () => {
+//   const backdrop = document.querySelector('.offcanvas-backdrop');
+//   if (backdrop) {
+//     backdrop.remove();
+//   }
+// };
 
 onMounted(() => {
   const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
+  // const offcanvasInstance = new Offcanvas(offcanvasElement) 
   const offcanvasLinks = offcanvasElement.querySelectorAll('.nav-link');
 
-  // offcanvasLinks.forEach(link => {
-  //   link.addEventListener('click', closeOffcanvas);
-  // });
+  offcanvasLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      // removeBackdrop();
+      closeOffcanvas();
+    });
+  });
+
+  offcanvasElement.addEventListener('hidden.bs.offcanvas', removeBackdrop(), closeOffcanvas());
 });
 </script>
 
