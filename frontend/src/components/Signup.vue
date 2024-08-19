@@ -1,5 +1,3 @@
-
-
 <template>
     <div class="signup-container">
         <form @submit.prevent="handleSignup" class="signup-form">
@@ -12,7 +10,9 @@
         <p v-if="signupStatus === 'loading'">Signing up...</p>
         <p v-if="signupStatus === 'error'">{{ signupError }}</p>
         <p v-if="signupStatus === 'success'">Signup successful!</p>
+        <p v-if="signupStatus === 'user_exists'">User already exists! Redirecting to login...</p>
     </div>
+    <button class="go-to-login" @click="goToLogin">Go to Login</button>
 </template>
 
 <script>
@@ -29,6 +29,16 @@ export default {
     computed: {
         ...mapGetters(['signupStatus', 'signupError']),
     },
+    watch: {
+        signupStatus(newStatus) {
+            if (newStatus === 'success') {
+                setTimeout(() => {
+                    this.$router.push('/login');
+                }, 2000); 
+            }
+        },
+    },
+
     methods: {
         ...mapActions(['signup']),
         handleSignup() {
@@ -37,87 +47,100 @@ export default {
                 email: this.email,
                 password: this.password,
             };
-
-            // // Clear any previous error messages
-            // this.signupError = null;
-
-            // Call the signup action
             this.signup(userData);
 
-            // Clear the form fields upon successful signup
-            // if (this.signupStatus === 'success') {
-            //     this.username = '';
-            //     this.email = '';
-            //     this.password = '';
-            // }
-
         },
+            goToLogin() {
+                this.$router.push({ name: 'login' });
+            }
     },
 };
 </script>
 <style scoped>
+/* Container for the signup form */
 .signup-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 5%;
-    /* text-align: center; */
-    /* height: 100vh; */
-    /* background-color: #f0f2f5; */
-}
-
-.signup-form {
-    background: #fff;
-    padding: 20px;
+    background: #2c2c2c;
+    /* Dark background for 3D effect */
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-}
-
-.signup-form h2 {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow */
+    max-width: 400px;
+    margin: 0 auto;
     text-align: center;
-    margin-bottom: 20px;
-    color: #333;
 }
 
 .signup-form input {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ddd;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
     border-radius: 4px;
+    margin-top: 1rem;
+    background: #3a3a3a;
+    /* Slightly lighter background for inputs */
+    color: #fff;
+    font-size: 1rem;
+}
+
+.signup-form input::placeholder {
+    color: #b0b0b0;
+    /* Lighter color for placeholder text */
 }
 
 .signup-form button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
+    background: #ff5722;
+    /* Eye-catching button color */
+    color: #fff;
     border: none;
+    padding: 0.75rem 1.5rem;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    transition: background 0.3s ease;
+    width: 100%;
 }
 
-.signup-form button:disabled {
-    background-color: #007bff99;
+.signup-form button:hover {
+    background: #e64a19;
+    /* Darker button color on hover */
 }
 
-.signup-form button:hover:not(:disabled) {
-    background-color: #0056b3;
+.signup-form button:active {
+    background: #d84315;
+    /* Even darker color for active state */
 }
 
-.status-message {
+.signup-container p {
+    color: #f0f0f0;
+    /* Light text color */
+    margin-top: 1rem;
+}
+
+.go-to-login {
+    background: #3a3a3a;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 2rem auto 0;
     text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
+    transition: background 0.3s ease;
 }
 
-.status-message.error {
-    color: #ff4d4f;
+.go-to-login:hover {
+    background: #2c2c2c;
 }
 
-.status-message.success {
-    color: #28a745;
+.go-to-login:active {
+    background: #1a1a1a;
 }
+
+
 </style>
