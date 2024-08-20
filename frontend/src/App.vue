@@ -2,6 +2,10 @@
   <navbar-comp/>
   <router-view/>
   <footer-comp/>
+
+  <ejs-chart id="container">
+
+  </ejs-chart>
 </template>
 
 <style>
@@ -16,15 +20,22 @@
     z-index: -1;
     padding-top: 10%;
   }
-
+ #container{
+   height: 350px;
+ }
 </style>
 <script>
 import FooterComp from './components/FooterComp.vue'
 import NavbarComp from './components/NavbarComp.vue'
+import { ChartPlugin } from '@syncfusion/ej2-vue-charts';
+
+
+
 export default {
   components: {
     NavbarComp,
-    FooterComp
+    FooterComp,
+    'ejs-chart': ChartPlugin
   }
 }
 </script>

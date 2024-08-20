@@ -13,19 +13,19 @@
       <div class="offcanvas-body bg-dark">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <router-link  class="nav-link" @click="closeOffcanvas" active-class="active" to="/home">HOME</router-link>
+            <router-link  class="nav-link" @click="closeOffcanvas(),removeBackdrop()" active-class="active" to="/home">HOME</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/energy">ENERGY DATA</router-link>
+            <router-link class="nav-link" @click="closeOffcanvas(),removeBackdrop()" active-class="active" to="/energy">ENERGY DATA</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/calc">CALCULATE</router-link>
+            <router-link class="nav-link" @click="closeOffcanvas()" active-class="active" to="/calc">CALCULATE</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/help">HELP</router-link>
+            <router-link class="nav-link" @click="closeOffcanvas()" active-class="active" to="/help">HELP</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/login">LOGIN</router-link>
+            <router-link class="nav-link" @click="closeOffcanvas()" active-class="active" to="/login">LOGIN</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" @click="closeOffcanvas" active-class="active" to="/">SIGN UP</router-link>
@@ -47,12 +47,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Offcanvas } from 'bootstrap';
 
-// const closeOffcanvas = () => {
-//   const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
-//   const offcanvasInstance = Offcanvas.getInstance(offcanvasElement);
-//   // offcanvasInstance.hide();
 
-// };
+// closeOffcanvas() {
+//       const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
+//       const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+//       offcanvas.hide();
+//     }
 
 const closeOffcanvas = () => {
   const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
@@ -60,26 +60,25 @@ const closeOffcanvas = () => {
   offcanvasInstance.hide();
 }
 
-// const removeBackdrop = () => {
-//   const backdrop = document.querySelector('.offcanvas-backdrop');
-//   if (backdrop) {
-//     backdrop.remove();
-//   }
-// };
+const removeBackdrop = () => {
+  const backdrop = document.querySelector('offcanvas');
+  if (backdrop) {
+    backdrop.remove();
+  }
+};
 
 onMounted(() => {
   const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
-  // const offcanvasInstance = new Offcanvas(offcanvasElement) 
   const offcanvasLinks = offcanvasElement.querySelectorAll('.nav-link');
 
   offcanvasLinks.forEach(link => {
     link.addEventListener('click', () => {
-      // removeBackdrop();
       closeOffcanvas();
+      removeBackdrop();
     });
   });
 
-  offcanvasElement.addEventListener('hidden.bs.offcanvas', removeBackdrop(), closeOffcanvas());
+  offcanvasElement.addEventListener('hidden.bs.offcanvas', closeOffcanvas());
 });
 </script>
 
