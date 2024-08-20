@@ -1,4 +1,5 @@
 <template lang="">
+<Loader v-if="isLoading" />
     <h2 class="header text-light">Login</h2>
     <div class="login-container">
     <form class="login-form" @submit.prevent="handleLogin">
@@ -21,14 +22,23 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Loader from './Loader.vue';
 export default {
+    components: {
+    Loader,
+  },
     data() {
         return {
             email: '',
             password: '',
+            isLoading: true,
         };
     },
-
+mounted() {
+    setTimeout(() => {
+      this.isLoading = false; // Simulate loading completion
+    }, 1000);
+  },
     computed: {
         ...mapGetters(['loginError', 'isLoggedIn']),
     },

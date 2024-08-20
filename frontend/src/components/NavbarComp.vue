@@ -1,5 +1,52 @@
 <template>
-  <nav class="navbar navbar-dark bg-dark fixed-top">
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img class="logo"
+                    src="https://i.ibb.co/LSQPqpS/LC-STUDIO-HI-RES-LOGO-2023-redwht-1.webp" alt=""> LC STUDIO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar"
+                aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Navigation</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body bg-dark">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/home">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/energy">ENERGY DATA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/calc">CALCULATE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/help">HELP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">LOGIN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">SIGN UP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+  <!-- <nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img class="logo" src="https://i.ibb.co/LSQPqpS/LC-STUDIO-HI-RES-LOGO-2023-redwht-1.webp" alt=""> LC STUDIO</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
@@ -37,15 +84,15 @@
       </div>
     </div>
   </div>
-</nav>
+</nav> -->
 
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import { Offcanvas } from 'bootstrap';
+//import { onMounted } from 'vue';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+//
+//import { Offcanvas } from 'bootstrap';
 
 
 // closeOffcanvas() {
@@ -54,32 +101,32 @@ import { Offcanvas } from 'bootstrap';
 //       offcanvas.hide();
 //     }
 
-const closeOffcanvas = () => {
-  const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
-  const offcanvasInstance = Offcanvas.getInstance(offcanvasElement)
-  offcanvasInstance.hide();
-}
+//const closeOffcanvas = () => {
+//  const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
+//  const offcanvasInstance = Offcanvas.getInstance(offcanvasElement)
+//  offcanvasInstance.hide();
+//}
+//
+//const removeBackdrop = () => {
+//  const backdrop = document.querySelector('offcanvas');
+//  if (backdrop) {
+//    backdrop.remove();
+//  }
+//};
+//
+//onMounted(() => {
+//  const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
+//  const offcanvasLinks = offcanvasElement.querySelectorAll('.nav-link');
+//
+//  offcanvasLinks.forEach(link => {
+//    link.addEventListener('click', () => {
+//      closeOffcanvas();
+//      removeBackdrop();
+//    });
+//  });
 
-const removeBackdrop = () => {
-  const backdrop = document.querySelector('offcanvas');
-  if (backdrop) {
-    backdrop.remove();
-  }
-};
-
-onMounted(() => {
-  const offcanvasElement = document.getElementById('offcanvasDarkNavbar');
-  const offcanvasLinks = offcanvasElement.querySelectorAll('.nav-link');
-
-  offcanvasLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      closeOffcanvas();
-      removeBackdrop();
-    });
-  });
-
-  offcanvasElement.addEventListener('hidden.bs.offcanvas', closeOffcanvas());
-});
+//  offcanvasElement.addEventListener('hidden.bs.offcanvas', closeOffcanvas());
+//});
 </script>
 
 

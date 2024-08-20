@@ -1,5 +1,6 @@
 <template>
   <div class="solar-calculator">
+<Loader v-if="isLoading" />
     <h1>Solar Panel Calculator</h1>
     
     <div class="form-group">
@@ -31,9 +32,14 @@
 </template>
 
 <script>
+import Loader from '../components/Loader.vue';
 export default {
+   components: {
+    Loader,
+  },
   data() {
     return {
+      isLoading: true,
       location: '',
       dailyEnergy: 30,
       efficiency: 18,
@@ -41,6 +47,11 @@ export default {
       sunlightHours: 5, // Default value; you may want to make this dynamic based on location.
       systemSize: null
     };
+  },
+   mounted() {
+    setTimeout(() => {
+      this.isLoading = false; // Simulate loading completion
+    }, 1000);
   },
   methods: {
     calculateSystemSize() {

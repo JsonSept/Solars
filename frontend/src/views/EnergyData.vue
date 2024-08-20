@@ -1,5 +1,6 @@
 <template>
   <div class="solar-calculator bg-dark text-light">
+<Loader v-if="isLoading"/>
     <h1>Simple Solar Power Calculator</h1>
 
     <!-- Input for Location -->
@@ -25,7 +26,7 @@
     </div>
 
     <!-- Button to Calculate -->
-    <button @click="calculatePower">Calculate Power Output</button>
+    <button class="btn" @click="calculatePower">Calculate Power Output</button>
 
     <!-- Display the Result -->
     <div v-if="powerGenerated !== null">
@@ -36,9 +37,14 @@
 </template>
 
 <script>
+import Loader from '../components/Loader.vue';
 export default {
+  components: {
+    Loader,
+  },
   data() {
     return {
+      isLoading: true,
       location: '',
       panelArea: 10, // Default value
       efficiency: 18, // Default value (in percentage)
@@ -55,7 +61,12 @@ export default {
       // Simple calculation assuming 5 hours of sunlight
       this.powerGenerated = (this.panelArea * irradiance * panelEfficiencyDecimal * this.sunlightHours) / 1000;
     }
-  }
+  },
+   mounted() {
+    setTimeout(() => {
+      this.isLoading = false; // Simulate loading completion
+    }, 3000);
+  },
 }
 </script>
 
@@ -79,7 +90,7 @@ label {
   display: block;
 }
 
-input, select, button {
+input, select, .btn {
   width: 100%;
   padding: 10px;
   margin-top: 5px;
