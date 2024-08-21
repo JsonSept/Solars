@@ -1,6 +1,5 @@
 <template>
   <div class="solar-calculator bg-dark text-light">
-<Loader v-if="isLoading"/>
     <h1>Simple Solar Power Calculator</h1>
 
     <!-- Input for Location -->
@@ -11,7 +10,7 @@
 
     <!-- Simplified Panel Area Input -->
     <div class="form-group">
-      <label for="panelArea">Solar Panel Size (m²)</label>
+      <label for="panelArea">Solar Array Surface Area (m²)</label>
       <input type="number" id="panelArea" v-model="panelArea" placeholder="e.g., 10">
     </div>
 
@@ -37,14 +36,11 @@
 </template>
 
 <script>
-import Loader from '../components/Loader.vue';
 export default {
-  components: {
-    Loader,
-  },
+ 
   data() {
     return {
-      isLoading: true,
+      
       location: '',
       panelArea: 10, // Default value
       efficiency: 18, // Default value (in percentage)
@@ -62,11 +58,7 @@ export default {
       this.powerGenerated = (this.panelArea * irradiance * panelEfficiencyDecimal * this.sunlightHours) / 1000;
     }
   },
-   mounted() {
-    setTimeout(() => {
-      this.isLoading = false; // Simulate loading completion
-    }, 3000);
-  },
+  
 }
 </script>
 

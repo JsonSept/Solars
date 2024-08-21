@@ -1,5 +1,4 @@
 <template>
-<Loader v-if="isLoading" />
    <h1 class="header text-light">Contact Form</h1>
    <form action="https://formspree.io/f/xblraoel"method="POST" class="formspree">
   <label>
@@ -15,23 +14,14 @@
 </form>
 </template>
 <script>
-  import Loader from '../components/Loader.vue';
-
+  
 
 export default {
-  components: {
-    Loader,
-  },
+ 
   data() {
-    return {
-      isLoading: true,
-    };
+    
   },
-  mounted() {
-    setTimeout(() => {
-      this.isLoading = false; // Simulate loading completion
-    }, 1000);
-  },
+  
 }
 </script>
 <style scoped>

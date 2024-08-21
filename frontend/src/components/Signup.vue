@@ -1,5 +1,4 @@
 <template>
-    <Loader v-if="isLoading" />
     <div class="signup-container">
         <form @submit.prevent="handleSignup" class="signup-form">
             <input v-model="username" type="text" placeholder="Username" required />
@@ -18,14 +17,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import Loader from './Loader.vue';
+
 export default {
-    components: {
-        Loader,
-    },
+    
     data() {
         return {
-            isLoading: true,
+            
             username: '',
             email: '',
             password: '',
@@ -59,11 +56,7 @@ export default {
                 this.$router.push({ name: 'login' });
             }
     },
-     mounted() {
-    setTimeout(() => {
-      this.isLoading = false; // Simulate loading completion
-    }, 1000);
-  },
+    
 };
 </script>
 <style scoped>

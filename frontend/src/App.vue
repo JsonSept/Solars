@@ -1,7 +1,8 @@
 <template>
-  <navbar-comp/>
-  <router-view/>
-  <footer-comp/>
+  <Loader v-if="isLoading" />
+  <navbar-comp />
+  <router-view v-if="!isLoading" />
+  <footer-comp />
 </template>
 
 <style>
@@ -23,7 +24,7 @@
 <script>
 import FooterComp from './components/FooterComp.vue'
 import NavbarComp from './components/NavbarComp.vue'
-
+import Loader from './components/Loader.vue';
 
 
 
@@ -31,7 +32,18 @@ export default {
   components: {
     NavbarComp,
     FooterComp,
-    
-  }
+    Loader,
+  },
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false; // Simulate loading completion
+    }, 1000);
+  },
 }
+
 </script>
