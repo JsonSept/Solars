@@ -1,17 +1,19 @@
 <template>
-   <h1 class="header text-light">Contact Form</h1>
-   <form action="https://formspree.io/f/xblraoel"method="POST" class="formspree">
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
-</form>
+  <div class="contact">
+    <h1 class="header text-light">Contact Form</h1>
+    <form action="https://formspree.io/f/xblraoel" method="POST" class="formspree">
+      <label>
+        Your email:
+        <input type="email" name="email">
+      </label>
+      <label>
+        Your message:
+        <textarea name="message"></textarea>
+      </label>
+      <!-- your other form fields go here -->
+      <button class="btn bg-warning" type="submit">Send</button>
+    </form>
+  </div>
 </template>
 <script>
   
@@ -25,7 +27,10 @@ export default {
 }
 </script>
 <style scoped>
-
+.contact{
+  padding-top: 20%;
+  background: 0.5;
+}
 
 /* Basic form styling */
  .formspree {
@@ -37,6 +42,7 @@ export default {
    /* Subtle shadow */
   max-width: 600px;
   margin: 0 auto;
+  
 }
 
 .header {
@@ -70,7 +76,7 @@ textarea {
 }
 
 button {
-  background: #ff5722;
+  background: #f8d700;
    /* Eye-catching button color */
   color: #fff;
   border: none;
@@ -82,7 +88,7 @@ button {
 }
 
 button:hover {
-  background: #e64a19;
+  background: #feba00;
 }
 
 button:active {

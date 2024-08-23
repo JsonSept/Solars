@@ -1,5 +1,6 @@
 <template lang="">
-    <h2 class="header text-light">Login</h2>
+    <div class="log">
+    <h1 class="header text-light">Login</h1>
     <div class="login-container">
     <form class="login-form" @submit.prevent="handleLogin">
       <div>
@@ -18,6 +19,7 @@
     <p v-if="loginStatus === 'success'">Login successful! Redirecting to home...</p>
     <p v-if="loginStatus === 'invalid'">Invalid credentials. Please try again.</p>
   </div>
+</div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -58,6 +60,13 @@ mounted() {
 };
 </script>
 <style scoped>
+.header {
+    padding-bottom:10%; 
+    text-align: center;
+}
+.log {
+    padding-top: 7%;
+}
 /* Container for the login form */
 .login-container {
     background: #2c2c2c;
@@ -100,7 +109,7 @@ mounted() {
 }
 
 .login-form button {
-    background: #ff5722;
+    background: #ffcc00;
     /* Eye-catching button color */
     color: #fff;
     border: none;
@@ -110,7 +119,7 @@ mounted() {
     font-size: 1rem;
     margin-top: 1.5rem;
     transition: background 0.3s ease;
-    width: 100%;
+    width: 50%;
 }
 
 .login-form button:hover {
@@ -126,6 +135,7 @@ mounted() {
 .login-container p {
     color: #f0f0f0;
     /* Light text color */
-    margin-top: 1rem;
+    /* margin-top: 3rem; */
+    padding-top: 3%;
 }
 </style>

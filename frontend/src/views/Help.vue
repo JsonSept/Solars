@@ -1,85 +1,54 @@
-<!-- <template lang="">
-     <Loader v-if="isLoading" />
-    <div>
-        <h1 class="header text-light">Help Page</h1>
-    </div>
-</template>
-<script>
-import Loader from '../components/Loader.vue';
-export default {
-     components: {
-    Loader,
-  },
-  data() {
-    return {
-      isLoading: true,
-    };
-  },
-  mounted() {
-    setTimeout(() => {
-      this.isLoading = false; // Simulate loading completion
-    }, 3000);
-  },
-}
-</script>
-<style lang="">
-    
-</style> -->
-
-
 <template>
-  <div class="solar-calculator bg-dark text-light">
-    <h1>Simple Solar Power Calculator</h1>
+  <div class="help">
+    <h1>Solar Track Calculator Help Guide</h1>
+    <h2>Welcome to the Solar Track Calculator!</h2>
+    This guide will walk you through the steps to use the app effectively, helping you understand how to calculate solar
+    panel output, track energy consumption, and determine how much energy is sent back to the grid and its corresponding
+    monetary value.
 
-    <!-- Input for Location -->
-    <div class="form-group">
-      <label for="location">Your Location</label>
-      <input type="text" id="location" v-model="location" placeholder="Enter your city or town">
-    </div>
+    <h2>Step 1: Input Solar Panel Details</h2>
+    Solar Irradiance: Enter the average solar irradiance (in kWh/m²/day) for your location. You can find this
+    information
+    from reliable weather or solar radiation databases.
+    Panel Efficiency: Input the efficiency of your solar panels. This is typically a percentage that indicates how well
+    your panels convert sunlight into electricity.
+    Solar Panel Array Surface Area (m²): Enter the total surface area of your solar panel array in square meters.
+    <h2>Step 2: Calculate Solar Energy Output</h2>
+    Once you’ve inputted the necessary data, the calculator will compute the total electricity output (in kWh) produced
+    by
+    your solar panels. This is the amount of energy your panels can generate under optimal conditions.
 
-    <!-- Simplified Panel Area Input -->
-    <div class="form-group">
-      <label for="panelArea">Solar Array Surface Area (m²)</label>
-      <input type="number" id="panelArea" v-model="panelArea" placeholder="e.g., 10">
-    </div>
+    <h2>Step 3: Enter Your Energy Consumption</h2>
+    Daily Energy Consumption (kWh): Input your average daily energy usage. This information can usually be found on your
+    electricity bill.
+    <h2>Step 4: View Surplus Energy</h2>
+    The app will compare your solar energy output with your daily energy consumption to calculate the surplus energy.
+    This
+    is the excess electricity that your panels generate, which you can send back to the grid.
 
-    <!-- Simplified Panel Efficiency with Default -->
-    <div class="form-group">
-      <label for="efficiency">Panel Efficiency</label>
-      <select id="efficiency" v-model="efficiency">
-        <option value="15">Standard (15%)</option>
-        <option value="18">High Efficiency (18%)</option>
-        <option value="20">Premium (20%)</option>
-      </select>
-    </div>
+    <h2>Step 5: Calculate Monetary Value</h2>
+    Feed-In Tariff: Enter the current feed-in tariff, which is the rate paid by the grid for the electricity you send
+    back. This is usually provided by your utility company.
+    The calculator will then estimate how much money you can earn from the surplus energy fed into the grid.
+    <h2>Step 6: Review Results</h2>
+    After entering all the details, the app will display:
 
-    <!-- Button to Calculate -->
-    <button class="btn" @click="calculatePower">Calculate Power Output</button>
+    Total Solar Energy Output (kWh)
+    Energy Consumed (kWh)
+    Energy Sent Back to the Grid (kWh)
+    Estimated Earnings: The potential income from selling your surplus energy to the grid.
 
-    <!-- Display the Results -->
-    <div v-if="powerGenerated !== null">
-      <h2 class="out text-light">Estimated Power Output: {{ powerGenerated.toFixed(2) }} kWh/day</h2>
-      <p class="out text-light">This is equivalent to {{ powerInWatts.toFixed(2) }} W/day</p>
-      <p class="out text-light">(This is an estimate based on average sunlight hours for your location)</p>
-    </div>
+    <h2>Tips for Accurate Results</h2>
+    Update Regularly: Keep your solar irradiance data up to date by regularly checking reliable sources.
+    Review Tariff Rates: Tariff rates can change, so make sure you’re using the most current rate.
+    Monitor Consumption: Your energy consumption may vary, so periodically adjust the input to reflect your actual
+    usage.
+    <h2>Troubleshooting</h2>
+    If you encounter any issues:<br>
 
-    <!-- Input for Daily Consumption -->
-    <div class="form-group" v-if="powerGenerated !== null">
-      <label for="consumption">Your Daily Consumption (kWh/day)</label>
-      <input type="number" id="consumption" v-model="dailyConsumption" placeholder="e.g., 5">
-    </div>
-
-    <!-- Button to Compare with Consumption -->
-    <button class="btn" v-if="powerGenerated !== null && dailyConsumption !== null" @click="compareConsumption">Compare
-      Consumption</button>
-
-    <!-- Display the Consumption Comparison and Currency Calculation -->
-    <div v-if="consumptionResult !== null">
-      <h3 class="out text-light">{{ consumptionResult }}</h3>
-      <h4 v-if="savingsInRand !== null" class="out text-light">
-        Potential Savings: R{{ savingsInRand.toFixed(2) }}
-      </h4>
-    </div>
+    Check Data Accuracy: Ensure all input data is correct and up-to-date.<br>
+    Recalculate: If you receive unexpected results, double-check your entries and try recalculating.<br>
+    Contact Support: If the issue persists, please contact our support team for assistance.
   </div>
 </template>
 
@@ -87,116 +56,15 @@ export default {
 
 
 export default {
- 
-  data() {
-    return {
-      isLoading: true,
-      location: '',
-      panelArea: 10, // Default value
-      efficiency: 18, // Default value (in percentage)
-      sunlightHours: 5, // Estimated average sunlight hours
-      powerGenerated: null,
-      powerInWatts: null,
-      dailyConsumption: null,
-      consumptionResult: null,
-      savingsInRand: null,
-      conversionRate: 1.33, // Conversion rate
-      randPerKWh: 1.5, // Example Rand rate per kWh
-    };
-  },
-  methods: {
-    async calculatePower() {
-      // Assume a fixed average solar irradiance (1000 W/m²)
-      const irradiance = 1000;
-      const panelEfficiencyDecimal = this.efficiency / 100;
-
-      // Simple calculation assuming 5 hours of sunlight
-      this.powerGenerated = (this.panelArea * irradiance * panelEfficiencyDecimal * this.sunlightHours) / 1000;
-
-      // Convert kWh to watts
-      this.powerInWatts = this.powerGenerated * 1000;
-    },
-    compareConsumption() {
-      if (this.dailyConsumption > this.powerGenerated) {
-        this.consumptionResult = `Your daily consumption of ${this.dailyConsumption} kWh exceeds the generated power of ${this.powerGenerated.toFixed(2)} kWh/day.`;
-      } else {
-        this.consumptionResult = `Your generated power of ${this.powerGenerated.toFixed(2)} kWh/day is sufficient for your daily consumption of ${this.dailyConsumption} kWh.`;
-
-        // Calculate savings in Rand
-        const differenceInKWh = this.powerGenerated - this.dailyConsumption;
-        const savings = differenceInKWh * this.conversionRate;
-        this.savingsInRand = savings * this.randPerKWh;
-      }
-    }
-  },
 
 }
 </script>
 
 <style>
-/* Styles remain the same */
-.solar-calculator {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
-  /* background: #f7f7f7; */
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-wrap: wrap;
-  /* display: grid; */
-  gap: 10px;
-  justify-content: space-between;
-  padding-top: 50px;
-  padding-bottom: 100px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-  flex: 1 1 calc(50% - 20px);
-  min-width: 250px;
-}
-
-label {
-  font-weight: bold;
-  display: block;
-}
-
-input,
-select,
-.btn {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 5px;
-}
-
-.btn {
-  background: #ff5722;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #ff5725;
-}
-
-h2,
-h3,
-h4 {
-  color: #333;
-  margin: 0;
-  padding: 10px 0;
-}
-
-.out {
-  flex: 1 1 calc(100% - 20px);
-}
-
-@media (min-width: 768px) {
-  .out {
-    flex: 1 1 calc(50% - 20px);
-  }
+.help {
+  padding-top: 10%;
+  padding-bottom: 12%;
+  color:beige;
+  height:100%;
 }
 </style>

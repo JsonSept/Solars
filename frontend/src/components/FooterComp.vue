@@ -1,6 +1,6 @@
 <template lang="">
-    <div class="footer bg-dark text-light">
-        <p> Copyright &copy; <a href="https://lcstudio.co.za/">Life Choices Studios</a> {{new Date().getFullYear()}}</p>
+    <div class="footer bg-warning text-light">
+        <p> Copyright &copy; SolarTrack {{new Date().getFullYear()}}</p>
     </div>
 </template>
 <script>
@@ -16,6 +16,7 @@ a{
 
 
     .footer {
+        background-color: pink;
         width: 100%;
         position:fixed;
         text-align: center;

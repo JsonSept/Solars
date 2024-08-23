@@ -91,7 +91,7 @@ export default {
 }
 
 .signup-form button {
-    background: #ff5722;
+    background: #ffcc00;
     /* Eye-catching button color */
     color: #fff;
     border: none;
@@ -101,7 +101,7 @@ export default {
     font-size: 1rem;
     margin-top: 1.5rem;
     transition: background 0.3s ease;
-    width: 100%;
+    width: 50%;
 }
 
 .signup-form button:hover {
