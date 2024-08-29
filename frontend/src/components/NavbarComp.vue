@@ -28,6 +28,9 @@
               <a class="nav-link" href="/energy">ENERGY DATA</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/test">Test</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/help">HELP</a>
             </li>
             <li class="nav-item">

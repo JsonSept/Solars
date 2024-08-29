@@ -199,6 +199,16 @@ export default {
     }
   }
 }
+
+//   async calculatePower() {
+//   // Assume a fixed average solar irradiance (1000 W/m²)
+//   const irradiance = 1000;
+//   const panelEfficiencyDecimal = this.efficiency / 100;
+
+//   // Simple calculation assuming 5 hours of sunlight
+//   this.powerGenerated = (this.panelArea * irradiance * panelEfficiencyDecimal * this.sunlightHours) / 1000;
+// }
+
 </script>
 
 <style>
