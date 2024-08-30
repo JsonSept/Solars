@@ -61,9 +61,6 @@
 </template>
 
 <script>
-import { Chart, BarElement, CategoryScale, LinearScale } from 'chart.js';
-
-Chart.register(BarElement, CategoryScale, LinearScale);
 
 export default {
   data() {
