@@ -31,6 +31,9 @@
               <a class="nav-link" href="/test">Test</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/newtest">New Test</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/help">HELP</a>
             </li>
             <li class="nav-item">
@@ -42,7 +45,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/contact">Contact</a>
             </li>
-
+            
           </ul>
         </div>
       </div>
